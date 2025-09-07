@@ -3,6 +3,7 @@ import dram_trace as dram
 import sram_traffic_os as sram
 import sram_traffic_ws as sram_ws
 import sram_traffic_is as sram_is
+import sram_traffic_rs as sram_rs
 
 def gen_all_traces(
         array_h = 4,
@@ -62,6 +63,19 @@ def gen_all_traces(
             sram_is.sram_traffic(
                 dimension_rows = array_h,
                 dimension_cols = array_w,
+                ifmap_h = ifmap_h, ifmap_w = ifmap_w,
+                filt_h = filt_h, filt_w = filt_w,
+                num_channels = num_channels,
+                strides = strides, num_filt = num_filt,
+                ofmap_base = ofmap_base, filt_base = filt_base, ifmap_base = ifmap_base,
+                sram_read_trace_file = sram_read_trace_file,
+                sram_write_trace_file = sram_write_trace_file
+            )
+    elif data_flow == 'rs':
+        sram_cycles, util = \
+            sram_rs.sram_traffic(
+                array_h,
+                array_w,
                 ifmap_h = ifmap_h, ifmap_w = ifmap_w,
                 filt_h = filt_h, filt_w = filt_w,
                 num_channels = num_channels,

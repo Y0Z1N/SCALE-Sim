@@ -46,7 +46,7 @@ def dram_trace_read_v2(
 
                 # Used up all the unique data in the SRAM?
                 if len(sram) + word_sz_bytes > sram_sz:
-
+                    # how many cycles are needed to fill the SRAM one buffer
                     if t_fill_start == -1:
                         t_fill_start = t_drain_start - math.ceil(len(sram) / (init_bw * word_sz_bytes))
 
@@ -55,7 +55,7 @@ def dram_trace_read_v2(
                     words_per_cycle = math.ceil(len(sram) / (cycles_needed * word_sz_bytes))
 
                     c = t_fill_start
-
+                    # Simulates the actual DRAM transfer
                     while len(sram) > 0:
                         trace = str(c) + ", "
 
